@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday LARAIB 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #ff4d6d);
+  color: #fff;
+}
+
+/* STARS */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: fall 10s linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+
+/* HEARTS */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 18px;
+  color: #ff4d6d;
+  animation: float 5s linear infinite;
+  z-index: 1;
+}
+@keyframes float {
+  to { transform: translateY(100vh); }
+}
+
+/* PAGES */
+.page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* GLASS BOX */
+.container {
+  width: 90%;
+  max-width: 430px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(0,0,0,0.35);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+/* NAME */
+.name {
+  font-size: 2.3rem;
+  text-shadow: 0 0 20px #ff4d6d;
+}
+
+/* BUTTON */
+button {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+}
+
+/* FIREWORKS */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% { transform: translate(0,0) scale(1); opacity:1; }
+  100% { transform: translate(var(--x),var(--y)) scale(0); opacity:0; }
+}
+
+/* TEXT */
+p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<audio id="music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3d5d6a3b8a.mp3?filename=romantic-piano-ambient-110397.mp3"></audio>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <div class="container">
+    <h1>🎂 Happy Birthday 🎉</h1>
+    <div class="name">LARAIB 💖</div>
+
+    <button onclick="startAll()">Start 💖</button>
+    <button onclick="goPage2()">Next 💌</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+  <div class="container">
+    <h1>🤍 To my best friend 🤍</h1>
+    <p id="text"></p>
+
+    <button onclick="goPage3()">Next ➡</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page hidden" id="page3">
+  <div class="container">
+    <h1>💌 Dear Best Friend 🤍</h1>
+
+    <p>
+One request - please never forget me, no matter how busy life gets 🤌<br><br>
+
+One promise - I will always be by your side, no matter how far apart we may be 🎀<br><br>
+
+One wish - may your life be filled with only happiness and may all your dreams come true 🫶<br><br>
+
+One truth - I always think about you every day, sometimes I miss you without any reason 🪄<br><br>
+
+One memory - All that laughter, late night talks, those silly memories, they mean a lot to me 🌷<br><br>
+
+One fear - I fear that time and circumstances might separate us 🥹<br><br>
+
+One hope - No matter how many years pass by, whenever we meet again, it should feel like nothing has changed 🎀<br><br>
+
+One advice - take care of yourself, never think you are any less and always keep smiling 😊🪄<br><br>
+
+And one last thing...<br>
+You will always be my favourite person 🫶♥️🪄
+    </p>
+
+    <button onclick="goPage2()">⬅ Back</button>
+  </div>
+</div>
+
+<script>
+
+/* STARS */
+const stars=document.getElementById("stars");
+for(let i=0;i<80;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*5+5)+"s";
+  stars.appendChild(s);
+}
+
+/* HEARTS */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},300);
+
+/* MUSIC */
+const music=document.getElementById("music");
+
+/* FIREWORK */
+function firework(x,y){
+  for(let i=0;i<25;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+
+    let angle=Math.random()*2*Math.PI;
+    let dist=Math.random()*120;
+
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    p.style.background=`hsl(${Math.random()*360},100%,60%)`;
+
+    p.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    p.style.setProperty("--y",Math.sin(angle)*dist+"px");
+
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1000);
+  }
+}
+
+document.addEventListener("click",(e)=>{
+  firework(e.clientX,e.clientY);
+});
+
+/* PAGE SWITCH */
+function goPage2(){
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+  typeText();
+}
+
+function goPage3(){
+  document.getElementById("page2").classList.add("hidden");
+  document.getElementById("page3").classList.remove("hidden");
+}
+
+function goPage1(){
+  document.getElementById("page3").classList.add("hidden");
+  document.getElementById("page1").classList.remove("hidden");
+}
+
+/* TYPING */
+function typeText(){
+  const msg=`You're not just my friend, you're my soul friend 🤌
+The person I'd choose lifetime again and again 🫶🎀
+No matter where life takes us nothing will change how much you mean to me 🌝🎀🫶
+I might not always say... but you are one of the best things that's ever happened to me 🥹💖`;
+
+  let i=0;
+  let el=document.getElementById("text");
+  el.innerHTML="";
+
+  function typing(){
+    if(i<msg.length){
+      el.innerHTML+=msg[i];
+      i++;
+      setTimeout(typing,25);
+    }
+  }
+  typing();
+}
+
+/* START */
+function startAll(){
+  music.play();
+  for(let i=0;i<5;i++){
+    setTimeout(()=>{
+      firework(Math.random()*window.innerWidth,Math.random()*window.innerHeight/2);
+    },i*300);
+  }
+}
+
+</script>
+
+</body>
+</html>
